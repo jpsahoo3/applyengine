@@ -12,6 +12,7 @@ from applyengine.repositories.memory import (
     InMemoryUserRepository,
 )
 from applyengine.services.auth import AuthService
+from applyengine.services.orchestration import OrchestrationService
 from applyengine.services.profile import ProfileService
 from applyengine.services.storage import LocalObjectStore
 
@@ -26,6 +27,7 @@ class ServiceContainer:
     object_store: LocalObjectStore
     auth_service: AuthService
     profile_service: ProfileService
+    orchestration_service: OrchestrationService
 
 
 def build_service_container(settings: Settings) -> ServiceContainer:
@@ -43,6 +45,7 @@ def build_service_container(settings: Settings) -> ServiceContainer:
         profile_analyzer=ProfileAnalyzerAgent(),
         resume_optimizer=ResumeOptimizerAgent(),
     )
+    orchestration_service = OrchestrationService()
     return ServiceContainer(
         settings=settings,
         metrics=metrics,
@@ -52,4 +55,5 @@ def build_service_container(settings: Settings) -> ServiceContainer:
         object_store=object_store,
         auth_service=auth_service,
         profile_service=profile_service,
+        orchestration_service=orchestration_service,
     )

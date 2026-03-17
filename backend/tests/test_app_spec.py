@@ -19,6 +19,8 @@ class AppSpecTests(unittest.TestCase):
                 "/api/v1/profiles/onboard",
                 "/api/v1/profiles/{user_id}",
                 "/api/v1/resumes/parse",
+                "/api/v1/workflows/state-machine",
+                "/api/v1/workflows/{user_id}/run",
             ],
         )
 
