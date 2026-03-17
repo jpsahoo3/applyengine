@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=82", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "applyengine"
+version = "0.1.0"
+description = "Distributed AI job-hunting SaaS platform"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "ApplyEngine" }]
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn>=0.35.0",
+  "pydantic>=2.11.0",
+  "pydantic-settings>=2.10.0",
+  "sqlalchemy>=2.0.0",
+  "asyncpg>=0.30.0",
+  "alembic>=1.16.0",
+  "celery>=5.5.0",
+  "redis>=6.0.0",
+  "httpx>=0.28.0",
+  "langgraph>=0.6.0",
+  "langchain-core>=0.3.0",
+  "sentence-transformers>=5.0.0",
+  "playwright>=1.54.0",
+  "beautifulsoup4>=4.13.0",
+  "prometheus-client>=0.22.0",
+  "structlog>=25.0.0",
+  "python-multipart>=0.0.20",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4.0",
+  "pytest-asyncio>=1.1.0",
+  "pytest-cov>=6.2.0",
+  "ruff>=0.12.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "backend"}
+
+[tool.setuptools.packages.find]
+where = ["backend"]
+include = ["applyengine*"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
