@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from applyengine.api.v1.routes_applications import register_application_routes
 from applyengine.api.v1.routes_auth import register_auth_routes
 from applyengine.api.v1.routes_health import register_health_routes
 from applyengine.api.v1.routes_jobs import register_job_routes
@@ -15,5 +16,6 @@ def build_api_spec(container: ServiceContainer) -> ApiSpec:
     register_auth_routes(api, container)
     register_profile_routes(api, container)
     register_job_routes(api, container)
+    register_application_routes(api, container)
     register_workflow_routes(api, container)
     return api

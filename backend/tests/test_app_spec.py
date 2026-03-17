@@ -13,8 +13,10 @@ class AppSpecTests(unittest.TestCase):
         self.assertEqual(
             paths,
             [
+                "/api/v1/applications/{user_id}/execute",
                 "/api/v1/auth/login",
                 "/api/v1/auth/signup",
+                "/api/v1/dashboard/{user_id}",
                 "/api/v1/health",
                 "/api/v1/jobs/{user_id}/discover",
                 "/api/v1/jobs/{user_id}/match",
