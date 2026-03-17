@@ -1,0 +1,11 @@
+.git
+.venv
+.tmp
+__pycache__
+*.pyc
+frontend/node_modules
+frontend/.next
+dist
+build
+artifacts
+

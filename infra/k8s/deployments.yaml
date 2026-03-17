@@ -1,0 +1,155 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-api
+  namespace: applyengine
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: applyengine-api
+  template:
+    metadata:
+      labels:
+        app: applyengine-api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/example/applyengine-api:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: applyengine-config
+            - secretRef:
+                name: applyengine-secrets
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-frontend
+  namespace: applyengine
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: applyengine-frontend
+  template:
+    metadata:
+      labels:
+        app: applyengine-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/example/applyengine-frontend:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-scraping-workers
+  namespace: applyengine
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: applyengine-scraping-workers
+  template:
+    metadata:
+      labels:
+        app: applyengine-scraping-workers
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/applyengine-api:latest
+          env:
+            - name: WORKER_POOL
+              value: scraping-workers
+          envFrom:
+            - configMapRef:
+                name: applyengine-config
+            - secretRef:
+                name: applyengine-secrets
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-ai-workers
+  namespace: applyengine
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: applyengine-ai-workers
+  template:
+    metadata:
+      labels:
+        app: applyengine-ai-workers
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/applyengine-api:latest
+          env:
+            - name: WORKER_POOL
+              value: ai-workers
+          envFrom:
+            - configMapRef:
+                name: applyengine-config
+            - secretRef:
+                name: applyengine-secrets
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-application-workers
+  namespace: applyengine
+spec:
+  replicas: 14
+  selector:
+    matchLabels:
+      app: applyengine-application-workers
+  template:
+    metadata:
+      labels:
+        app: applyengine-application-workers
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/applyengine-api:latest
+          env:
+            - name: WORKER_POOL
+              value: application-workers
+          envFrom:
+            - configMapRef:
+                name: applyengine-config
+            - secretRef:
+                name: applyengine-secrets
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: applyengine-outreach-workers
+  namespace: applyengine
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: applyengine-outreach-workers
+  template:
+    metadata:
+      labels:
+        app: applyengine-outreach-workers
+    spec:
+      containers:
+        - name: worker
+          image: ghcr.io/example/applyengine-api:latest
+          env:
+            - name: WORKER_POOL
+              value: outreach-workers
+          envFrom:
+            - configMapRef:
+                name: applyengine-config
+            - secretRef:
+                name: applyengine-secrets
+

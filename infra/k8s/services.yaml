@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: applyengine-api
+  namespace: applyengine
+spec:
+  selector:
+    app: applyengine-api
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: applyengine-frontend
+  namespace: applyengine
+spec:
+  selector:
+    app: applyengine-frontend
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+

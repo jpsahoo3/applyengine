@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: applyengine-config
+  namespace: applyengine
+data:
+  APP_ENV: production
+  API_HOST: 0.0.0.0
+  API_PORT: "8000"
+  FRONTEND_BASE_URL: https://app.example.com
+  REDIS_URL: redis://applyengine-redis:6379/0
+  DATABASE_URL: postgresql+asyncpg://<DB_USER>:<DB_PASSWORD>@applyengine-postgres:5432/<DB_NAME>
+
