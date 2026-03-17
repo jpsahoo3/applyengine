@@ -34,6 +34,7 @@ class Resume:
     user_id: str
     storage_key: str
     source_filename: str
+    parsed_text: str
     created_at: datetime = field(default_factory=utc_now)
 
 
@@ -91,4 +92,3 @@ class AgentLog:
     status: str
     message: str
     created_at: datetime = field(default_factory=utc_now)
-
