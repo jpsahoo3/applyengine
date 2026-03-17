@@ -1,7 +1,9 @@
 .venv/
+backend/.venv/
 .tmp/
 __pycache__/
 *.py[cod]
+*.egg-info/
 .pytest_cache/
 .coverage
 htmlcov/
@@ -25,4 +27,3 @@ uploads/
 storage/
 *.sqlite3
 *.log
-

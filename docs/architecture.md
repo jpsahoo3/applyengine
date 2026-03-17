@@ -154,13 +154,20 @@ flowchart TB
 
 ## 9. Local Development
 
+```bash
+python -m venv backend/.venv
+source backend/.venv/bin/activate
+backend/.venv/bin/python -m pip install -e .[dev]
+backend/.venv/bin/python -m unittest discover -s backend/tests -v
+backend/.venv/bin/python -m applyengine.main
+```
+
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-.\.venv\Scripts\python -m pip install -e .[dev]
-set PYTHONPATH=E:\Projects\applyengine\backend
-.\.venv\Scripts\python -m unittest discover -s backend\tests -v
-python -m applyengine.main
+python -m venv backend\.venv
+.\backend\.venv\Scripts\Activate.ps1
+.\backend\.venv\Scripts\python.exe -m pip install -e .[dev]
+.\backend\.venv\Scripts\python.exe -m unittest discover -s backend\tests -v
+.\backend\.venv\Scripts\python.exe -m applyengine.main
 ```
 
 ## 10. Docker
@@ -185,21 +192,30 @@ docker compose up --build
 
 ## 13. Validation Commands
 
-```powershell
+```bash
 # Backend tests
-set PYTHONPATH=E:\Projects\applyengine\backend
-.\.venv\Scripts\python -m unittest discover -s backend\tests -v
+backend/.venv/bin/python -m unittest discover -s backend/tests -v
 
 # Worker tests
-set PYTHONPATH=E:\Projects\applyengine\backend
-.\.venv\Scripts\python -m unittest backend.tests.test_worker_queues -v
+backend/.venv/bin/python -m unittest backend.tests.test_worker_queues -v
 
 # API tests
-set PYTHONPATH=E:\Projects\applyengine\backend
-.\.venv\Scripts\python -m unittest backend.tests.test_app_spec backend.tests.test_application_execution -v
+backend/.venv/bin/python -m unittest backend.tests.test_app_spec backend.tests.test_application_execution -v
 
 # LangGraph flow validation
-set PYTHONPATH=E:\Projects\applyengine\backend
-.\.venv\Scripts\python scripts\validate_graph.py
+backend/.venv/bin/python scripts/validate_graph.py
 ```
 
+```powershell
+# Backend tests
+.\backend\.venv\Scripts\python.exe -m unittest discover -s backend\tests -v
+
+# Worker tests
+.\backend\.venv\Scripts\python.exe -m unittest backend.tests.test_worker_queues -v
+
+# API tests
+.\backend\.venv\Scripts\python.exe -m unittest backend.tests.test_app_spec backend.tests.test_application_execution -v
+
+# LangGraph flow validation
+.\backend\.venv\Scripts\python.exe scripts\validate_graph.py
+```

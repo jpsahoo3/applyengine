@@ -13,30 +13,55 @@ ApplyEngine is a monorepo for a distributed AI job-hunting SaaS platform built a
 
 ## Local Development
 
-1. Create and activate the virtual environment:
+Python dependencies are isolated in `backend/.venv`. The backend source package lives in `backend/applyengine`, while the project definition stays at the repo root in `pyproject.toml`.
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+1. Create the backend virtual environment:
+
+```bash
+python -m venv backend/.venv
 ```
 
-2. Install backend dependencies:
+2. Activate it:
 
-```powershell
-.\.venv\Scripts\python -m pip install -e .[dev]
+```bash
+source backend/.venv/bin/activate
 ```
 
-3. Run backend tests:
-
 ```powershell
-.\.venv\Scripts\python -m pytest backend/tests
+.\backend\.venv\Scripts\Activate.ps1
 ```
 
-4. Start the API:
+3. Install backend dependencies:
+
+```bash
+backend/.venv/bin/python -m pip install -e .[dev]
+```
 
 ```powershell
-.\.venv\Scripts\python -m applyengine.main
+.\backend\.venv\Scripts\python.exe -m pip install -e .[dev]
 ```
+
+4. Run backend tests:
+
+```bash
+backend/.venv/bin/python -m unittest discover -s backend/tests -v
+```
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m unittest discover -s backend\tests -v
+```
+
+5. Start the backend bootstrap:
+
+```bash
+backend/.venv/bin/python -m applyengine.main
+```
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m applyengine.main
+```
+
+`applyengine.egg-info` is generated packaging metadata created by editable installs. It is not source code and is ignored by git.
 
 ## Branch Workflow
 
@@ -45,4 +70,3 @@ python -m venv .venv
 - `main`: production
 
 Development happens on `dev`, stable increments merge into `staging`, and validated releases merge into `main`.
-
