@@ -4,6 +4,7 @@ from dataclasses import replace
 from typing import Iterable
 
 from applyengine.db.models import Profile, Resume, User
+from applyengine.schemas.job import JobRecord
 
 
 class InMemoryUserRepository:
@@ -50,3 +51,23 @@ class InMemoryResumeRepository:
 
     def list_all(self) -> Iterable[Resume]:
         return [replace(resume) for resume in self._resumes_by_id.values()]
+
+
+class InMemoryJobRepository:
+    def __init__(self) -> None:
+        self._jobs_by_fingerprint: dict[str, JobRecord] = {}
+
+    @staticmethod
+    def _fingerprint(job: JobRecord) -> str:
+        return f"{job.source}|{job.company.lower()}|{job.title.lower()}|{job.apply_url.lower()}"
+
+    def upsert_many(self, jobs: Iterable[JobRecord]) -> list[JobRecord]:
+        stored_jobs: list[JobRecord] = []
+        for job in jobs:
+            fingerprint = self._fingerprint(job)
+            self._jobs_by_fingerprint[fingerprint] = replace(job)
+            stored_jobs.append(replace(self._jobs_by_fingerprint[fingerprint]))
+        return stored_jobs
+
+    def list_all(self) -> list[JobRecord]:
+        return [replace(job) for job in self._jobs_by_fingerprint.values()]

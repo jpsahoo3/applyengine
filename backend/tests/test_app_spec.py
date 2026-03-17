@@ -16,6 +16,8 @@ class AppSpecTests(unittest.TestCase):
                 "/api/v1/auth/login",
                 "/api/v1/auth/signup",
                 "/api/v1/health",
+                "/api/v1/jobs/{user_id}/discover",
+                "/api/v1/jobs/{user_id}/match",
                 "/api/v1/profiles/onboard",
                 "/api/v1/profiles/{user_id}",
                 "/api/v1/resumes/parse",
